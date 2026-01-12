@@ -174,7 +174,6 @@ function buildSkyScene() {
   const flareSize = 14;
   const sunSize = 64;
   const arcDuration = 60000;
-  const centerYOffset = 0.45;
 
   function animateSun(timestamp) {
     if (!animateSun.start) animateSun.start = timestamp;
@@ -194,7 +193,7 @@ function buildSkyScene() {
     const sunCenterX = x + sunSize / 2;
     const sunCenterY = y + sunSize / 2;
     const centerX = viewportW * 0.5;
-    const centerY = viewportH * centerYOffset;
+    const centerY = viewportH;
     const dx = centerX - sunCenterX;
     const dy = centerY - sunCenterY;
     const flareX = sunCenterX - dx * 0.35 - flareSize / 2;
