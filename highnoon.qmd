@@ -1,0 +1,232 @@
+<!--
+  ☀️ HIGH NOON EDITION BACKGROUND ☀️
+  ▸ Blue sky with drifting clouds and a sun that arcs across the page.
+  ▸ Gentle sky gradient from deeper blue overhead to lighter blue near the horizon.
+-->
+
+<style>
+:root {
+  --sky-top: #1f6ed4;
+  --sky-mid: #4ea2f5;
+  --sky-low: #9ad9ff;
+  --doc-h: 100vh;
+}
+
+html, body {
+  height: auto !important;
+  min-height: 100vh;
+}
+
+.page-columns,
+.page-columns > *,
+.quarto-grid,
+.quarto-article {
+  background: transparent !important;
+}
+
+body {
+  margin: 0;
+  position: relative;
+  color: #0b2239;
+  transition: color 0.35s ease-out;
+}
+
+body a { color: #0b2239; }
+
+#sky-layer {
+  position: absolute;
+  inset: 0;
+  min-height: var(--doc-h);
+  z-index: -3;
+  background: linear-gradient(
+      to bottom,
+      var(--sky-top) 0%,
+      var(--sky-mid) 45%,
+      var(--sky-low) 100%
+  );
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+#sun-group {
+  position: absolute;
+  top: 10vh;
+  left: -10vw;
+  z-index: -2;
+  pointer-events: none;
+}
+
+#sun {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, #ffffff 0%, #fff6c9 30%, rgba(255, 236, 170, 0.28) 58%, rgba(255, 236, 170, 0) 125%);
+  box-shadow: 0 0 100px rgba(255, 248, 210, 0.75);
+}
+
+#sun::before,
+#sun::after {
+  content: "";
+  position: absolute;
+  inset: -40px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 250, 230, 0.32) 0%, rgba(255, 250, 230, 0.1) 45%, rgba(255, 250, 230, 0) 70%);
+  opacity: 0.7;
+}
+
+#sun::after {
+  inset: -95px;
+  background: radial-gradient(circle, rgba(255, 246, 210, 0.22) 0%, rgba(255, 246, 210, 0.07) 40%, rgba(255, 246, 210, 0) 70%);
+  opacity: 0.5;
+}
+
+@keyframes sunArc {
+  0%   { transform: translate(-10vw, 6vh); }
+  50%  { transform: translate(50vw, -6vh); }
+  100% { transform: translate(110vw, 8vh); }
+}
+
+#cloud-layer {
+  position: absolute;
+  inset: 0;
+  min-height: var(--doc-h);
+  z-index: -2;
+  pointer-events: none;
+}
+
+.cloud {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 999px;
+  filter: blur(0.5px);
+  box-shadow: -20px 10px 0 rgba(255, 255, 255, 0.8),
+              25px 8px 0 rgba(255, 255, 255, 0.75);
+  animation: cloudDrift linear infinite;
+}
+
+@keyframes cloudDrift {
+  from { transform: translateX(-20vw); }
+  to   { transform: translateX(120vw); }
+}
+
+#sun-flare {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.32);
+  box-shadow: 0 0 22px rgba(255, 255, 255, 0.45);
+  z-index: -2;
+  pointer-events: none;
+  animation: flarePulse 7s ease-in-out infinite;
+}
+
+#sun-flare::after {
+  content: "";
+  position: absolute;
+  top: 22px;
+  left: 22px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 28px rgba(255, 255, 255, 0.3);
+}
+
+@keyframes flarePulse {
+  0%, 100% { opacity: 0.4; transform: scale(0.85); }
+  50% { opacity: 0.7; transform: scale(1.1); }
+}
+</style>
+
+<script>
+function setDocHeight() {
+  const full = document.documentElement.scrollHeight;
+  document.documentElement.style.setProperty('--doc-h', full + 'px');
+}
+window.addEventListener('load',  setDocHeight);
+window.addEventListener('resize', setDocHeight);
+
+function buildSkyScene() {
+  const sky = document.createElement('div');
+  sky.id = 'sky-layer';
+
+  const cloudLayer = document.createElement('div');
+  cloudLayer.id = 'cloud-layer';
+
+  const sunGroup = document.createElement('div');
+  sunGroup.id = 'sun-group';
+
+  const sun = document.createElement('div');
+  sun.id = 'sun';
+
+  const flare = document.createElement('div');
+  flare.id = 'sun-flare';
+
+  sunGroup.appendChild(sun);
+
+  document.body.prepend(cloudLayer);
+  document.body.prepend(flare);
+  document.body.prepend(sunGroup);
+  document.body.prepend(sky);
+
+  const flareSize = 14;
+  const sunSize = 64;
+  const arcDuration = 60000;
+  const centerYOffset = 0.45;
+
+  function animateSun(timestamp) {
+    if (!animateSun.start) animateSun.start = timestamp;
+    const elapsed = (timestamp - animateSun.start) % arcDuration;
+    const progress = elapsed / arcDuration;
+
+    const viewportW = window.innerWidth;
+    const viewportH = window.innerHeight;
+
+    const x = (-0.1 + 1.2 * progress) * viewportW;
+    const arcHeight = 0.1 * viewportH;
+    const baseHeight = 0.14 * viewportH;
+    const y = baseHeight - arcHeight * Math.sin(Math.PI * progress);
+
+    sunGroup.style.transform = `translate(${x}px, ${y}px)`;
+
+    const sunCenterX = x + sunSize / 2;
+    const sunCenterY = y + sunSize / 2;
+    const centerX = viewportW * 0.5;
+    const centerY = viewportH * centerYOffset;
+    const dx = centerX - sunCenterX;
+    const dy = centerY - sunCenterY;
+    const flareX = sunCenterX - dx * 0.35 - flareSize / 2;
+    const flareY = sunCenterY - dy * 0.35 - flareSize / 2;
+
+    flare.style.transform = `translate(${flareX}px, ${flareY}px)`;
+    requestAnimationFrame(animateSun);
+  }
+
+  requestAnimationFrame(animateSun);
+
+  const NUM_CLOUDS = 10;
+  for (let i = 0; i < NUM_CLOUDS; i++) {
+    const cloud = document.createElement('div');
+    cloud.className = 'cloud';
+
+    const size = 70 + Math.random() * 150;
+    cloud.style.width = size + 'px';
+    cloud.style.height = size * 0.35 + 'px';
+    const verticalBands = [6, 18, 28, 36, 42];
+    const topBase = verticalBands[Math.floor(Math.random() * verticalBands.length)];
+    cloud.style.top = (topBase + Math.random() * 8) + 'vh';
+    cloud.style.left = (-40 + Math.random() * 120) + 'vw';
+
+    const duration = (48 + Math.random() * 40).toFixed(2) + 's';
+    cloud.style.animationDuration = duration;
+    cloud.style.opacity = (0.5 + Math.random() * 0.35).toFixed(2);
+    cloud.style.animationDelay = (-Math.random() * 30).toFixed(2) + 's';
+
+    cloudLayer.appendChild(cloud);
+  }
+}
+window.addEventListener('load', buildSkyScene);
+
+</script>

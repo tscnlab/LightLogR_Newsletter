@@ -1,0 +1,68 @@
+---
+title: "LightLogR newsletter"
+subtitle: "December 2025, Edition #02"
+author: "LightLogR Team"
+format:
+  html:
+    self-contained: true
+    email: true
+    lightbox: true
+    toc: false
+    code-link: true
+lang: en
+
+---
+![](assets/logo_lightlogr.png){width="15%"}
+---
+
+{{< include highnoon.qmd >}}
+
+We are back with another dose of **LightLogR** updates, now under a bright *high noon* sky.
+
+---
+
+## LightLogR 0.10.0 High noon is here
+
+The newest release, [**LightLogR 0.10.0 High noon**](https://tscnlab.github.io/LightLogR/news/index.html#lightlogr-0100-high-noon), brings mid-day clarity to your analyses with improvements across the package. Thank you for the continued feedback and energy that made this possible.
+
+:::{.columns}
+
+::: {.column width="52%"}
+::: {.callout}
+### What’s new in High noon
+- Fresh enhancements and refinements for a smoother analysis workflow.
+- Expanded tools to support advanced use cases in light exposure research.
+- Continued focus on stability and reproducibility.
+:::
+:::
+
+::: {.column width="6%"}
+<!-- empty spacer column -->
+:::
+
+::: {.column width="42%"}
+::: {.callout}
+### Explore the release notes
+Read the full changelog in the [LightLogR news section](https://tscnlab.github.io/LightLogR/news/index.html#lightlogr-0100-high-noon).
+:::
+:::
+
+:::
+
+---
+
+## Advanced webinar success
+
+On **December 9**, the team hosted the **Open and reproducible analysis of light exposure and visual experience data** webinar in **two sessions**, covering **two of the four advanced use cases**. The sessions offered a deep dive into the LightLogR workflow and showcased how to implement advanced analyses in a transparent, reproducible way.
+
+For materials and updates, visit the [LightLogR webinar page](https://tscnlab.github.io/LightLogR_webinar/).
+
+---
+
+### Thank you to our learners
+
+A special note of appreciation: we sent out **122 certificates** to participants from the beginner and advanced workshops. Thank you for your dedication to open, reproducible research and for being part of this growing community.
+
+---
+
+##### We are thrilled to see LightLogR empowering research teams worldwide and look forward to sharing more tools, courses, and community news soon.{style="text-align: center;"}
