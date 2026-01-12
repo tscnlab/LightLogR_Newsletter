@@ -1,0 +1,23 @@
+.callout, .callout-note, .callout-important {
+  background-color: #f8f9fa !important;
+  color: #212529 !important;
+  font-size: 1.08em;
+  border-left: 4px solid #007bff !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+}
+.custom-box {
+  background-color: #f0f4f8;       /* light background for legibility */
+  color: #1a1a1a;                  /* dark text color */
+  border-left: 5px solid #007bff;  /* accent border */
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+  font-size: 1.1em;
+  line-height: 1.5;
+}
+
+.custom-box h4 {
+  margin-top: 0;
+  color: #004085;                  /* heading color */
+  font-weight: 600;
+}

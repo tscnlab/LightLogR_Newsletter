@@ -1,0 +1,157 @@
+<!--
+  ✨ FINAL VERSION ✨
+  ▸ One continuous sunrise gradient that spans the *entire* document ‑ no matter how long.
+  ▸ Stars now scroll together with the sky (they’re part of a pseudo‑element inside <body>, not fixed).
+  ▸ Text colour still flips automatically from white → black when the page gets bright.
+-->
+
+<style>
+:root {
+  --dark-start: #0b0d1d;  /* midnight blue  */
+  --predawn:    #1b2745;  /* predawn indigo */
+  --dawn:       #374c70;  /* early blue     */
+  --sunrise:    #f78c02;  /* orange glow    */
+  --daylight:   #fffbe6;  /* pale daylight  */
+  --doc-h: 100vh;         /* fallback until JS calculates true height */
+}
+
+/* Quarto sometimes forces 100% height; override so we can measure full scrollHeight */
+html, body {
+  height: auto !important;
+  min-height: 100vh;
+}
+
+/* Let everything under body be transparent so the sky shows through */
+.page-columns,
+.page-columns > *,
+.quarto-grid,
+.quarto-article {
+  background: transparent !important;
+}
+
+/* Base typography */
+body {
+  margin: 0;
+  position: relative;      /* anchor pseudo‑elements */
+  color: white;
+  transition: color 0.35s ease-out;
+}
+
+body.light-text {
+  color: black;
+}
+body.light-text a { color: #1a237e; }
+
+/* 🌅 1. Gradient layer (scrolls with page) */
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  min-height: var(--doc-h);
+  z-index: -2;             /* sit behind all content */
+
+  background: linear-gradient(
+      to bottom,
+      var(--dark-start) 0%,
+      var(--predawn)    20%,
+      var(--dawn)       45%,
+      var(--sunrise)    70%,
+      var(--daylight) 100%
+  );
+  background-repeat: no-repeat;
+  background-size: 100% 100%;  /* stretch to element size */
+}
+
+/* 2️⃣  Starfield container */
+#starfield {
+  position: absolute;
+  inset: 0;
+  min-height: var(--doc-h);
+  z-index: -2;
+  pointer-events: none;
+  /* fade stars out after ~55 % */
+  mask-image: linear-gradient(to bottom, #000 0%, #000 45%, transparent 55%);
+}
+
+/* Individual star */
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: white;
+  opacity: 0.9;
+  animation-name: twinkleStar;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes twinkleStar {
+  0%   { opacity: 0.2; transform: scale(0.8); }
+  50%  { opacity: 1;   transform: scale(1);   }
+  100% { opacity: 0.2; transform: scale(0.8); }
+}
+
+</style>
+
+<script>
+/****************************************************
+ * 1. Measure document height for gradient + stars  *
+ ***************************************************/
+function setDocHeight() {
+  const full = document.documentElement.scrollHeight;
+  document.documentElement.style.setProperty('--doc-h', full + 'px');
+}
+window.addEventListener('load',  setDocHeight);
+window.addEventListener('resize', setDocHeight);
+
+/****************************************************
+ * 2. Build a starfield with independently twinkling *
+ *    stars in the upper half of the sky.           *
+ ***************************************************/
+const NUM_STARS = 88;           // tweak density
+function createStarfield() {
+  const field = document.createElement('div');
+  field.id = 'starfield';
+
+  for (let i = 0; i < NUM_STARS; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+
+    // Random position: top 0–55 %, left 0–100 %
+    const topPct  = Math.random() * 55; // %
+    const leftPct = Math.random() * 100;
+    s.style.top  = topPct  + '%';
+    s.style.left = leftPct + '%';
+
+    // Random size between 1–2 px
+    const size = 1 + Math.random();
+    s.style.width  = size + 'px';
+    s.style.height = size + 'px';
+
+    // Random twinkle speed & offset
+    const duration = (2 + Math.random() * 4).toFixed(2) + 's';
+    const delay    = (Math.random() * 4).toFixed(2) + 's';
+    s.style.animationDuration = duration;
+    s.style.animationDelay    = delay;
+
+    field.appendChild(s);
+  }
+  document.body.prepend(field);
+}
+window.addEventListener('load', createStarfield);
+
+/****************************************************
+ * 3. Text colour switch after ~60 % scroll          *
+ ***************************************************/
+(() => {
+  const cutoff = 0.50;
+  window.addEventListener('scroll', () => {
+    const scrolled  = window.scrollY || window.pageYOffset;
+    const maxScroll = document.documentElement.scrollHeight - innerHeight;
+    const progress  = maxScroll ? scrolled / maxScroll : 0;
+    document.body.classList.toggle('light-text', progress >= cutoff);
+  });
+})();
+</script>
