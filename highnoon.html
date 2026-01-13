@@ -170,8 +170,19 @@ body a { color: #0b2239; }
   position: absolute;
   height: 2px;
   background: rgba(255, 255, 255, 0.35);
-  opacity: 0;
+  opacity: 0.0;
   /* Debug hint: set opacity to 0.35 to reveal the flare alignment line. */
+  transform-origin: 0 50%;
+}
+
+.flare-streak {
+  position: absolute;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 245, 220, 0.45) 45%, rgba(255, 255, 255, 0) 100%);
+  mix-blend-mode: screen;
+  filter: blur(1px);
+  opacity: 0.35;
   transform-origin: 0 50%;
 }
 
@@ -179,8 +190,9 @@ body a { color: #0b2239; }
   position: absolute;
   border-radius: 50%;
   mix-blend-mode: screen;
-  filter: blur(0.2px);
-  box-shadow: 0 0 18px rgba(255, 255, 255, 0.2);
+  background: radial-gradient(circle at 35% 35%, hsla(var(--flare-hue), 95%, 92%, calc(var(--flare-alpha) + 0.2)) 0%, hsla(var(--flare-hue), 85%, 75%, var(--flare-alpha)) 45%, hsla(var(--flare-hue), 85%, 60%, 0) 72%);
+  filter: blur(0.4px);
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.25);
 }
 </style>
 <script>
@@ -210,8 +222,12 @@ function buildSkyScene() {
   const flareLine = document.createElement('div');
   flareLine.id = 'flare-line';
 
+  const flareStreak = document.createElement('div');
+  flareStreak.className = 'flare-streak';
+
   sunGroup.appendChild(sun);
   flareGroup.appendChild(flareLine);
+  flareGroup.appendChild(flareStreak);
 
   document.body.prepend(cloudLayer);
   document.body.prepend(flareGroup);
@@ -223,17 +239,20 @@ function buildSkyScene() {
   const flareCycle = 7000;
 
   const flareSpecs = [
-    { distance: 0.3, size: 18, hue: 45, opacity: 0.35, phase: 0.0 },
-    { distance: 0.55, size: 26, hue: 190, opacity: 0.25, phase: 1.7 },
-    { distance: 0.8, size: 34, hue: 310, opacity: 0.18, phase: 3.1 }
+    { distance: 0.15, size: 16, hue: 42, opacity: 0.18, phase: 0.0 },
+    { distance: 0.48, size: 50, hue: 70, opacity: 0.15, phase: 1.1 },
+    { distance: 0.66, size: 100, hue: 195, opacity: 0.10, phase: 2.4 },
+    { distance: 0.78, size: 150, hue: 310, opacity: 0.07, phase: 3.1 },
+    { distance: 1.25, size: 200, hue: 24, opacity: 0.2, phase: 4.0 }
   ];
 
   const flareOrbs = flareSpecs.map((spec) => {
     const orb = document.createElement('div');
     orb.className = 'flare-orb';
-    orb.style.background = `hsla(${spec.hue}, 85%, 78%, ${spec.opacity})`;
     orb.style.width = `${spec.size}px`;
     orb.style.height = `${spec.size}px`;
+    orb.style.setProperty('--flare-hue', spec.hue);
+    orb.style.setProperty('--flare-alpha', spec.opacity);
     flareGroup.appendChild(orb);
     return orb;
   });
@@ -253,10 +272,10 @@ function buildSkyScene() {
 
     sunGroup.style.transform = `translate(${x}px, ${y}px)`;
 
-    const sunCenterX = x - sunSize / 1.9;
-    const sunCenterY = y + sunSize*1.4;
-    const centerX = viewportW * 0.5;
-    const centerY = viewportH;
+    const sunCenterX = x - (sunSize / 2);
+    const sunCenterY = y + sunSize*1.75;
+    const centerX = viewportW * (0.75-progress*0.5);
+    const centerY = viewportH * 0.66;
     const dx = centerX - sunCenterX;
     const dy = centerY - sunCenterY;
     const lineLength = Math.hypot(dx, dy);
@@ -267,13 +286,15 @@ function buildSkyScene() {
 
     const flarePhase = ((timestamp - animateSun.start) % flareCycle) / flareCycle;
     const pulse = flarePhase * Math.PI * 2;
+    const streakOffset = lineLength * 0.18;
+    const streakLength = lineLength * 0.6;
 
     flareOrbs.forEach((orb, index) => {
       const spec = flareSpecs[index];
       const offset = Math.sin(pulse + spec.phase);
       const drift = spec.distance + offset * 0.04;
       const size = spec.size * (1 + 0.12 * Math.cos(pulse + spec.phase));
-      const alpha = Math.min(0.6, Math.max(0.05, spec.opacity + 0.12 * offset));
+      const alpha = Math.min(0.5, Math.max(0, spec.opacity*0.5 + 0.05 * offset));
 
       const orbX = sunCenterX + dx * drift - size / 2;
       const orbY = sunCenterY + dy * drift - size / 2;
@@ -281,9 +302,14 @@ function buildSkyScene() {
       orb.style.transform = `translate(${orbX}px, ${orbY}px)`;
       orb.style.width = `${size}px`;
       orb.style.height = `${size}px`;
-      orb.style.background = `hsla(${spec.hue}, 85%, 78%, ${alpha})`;
+      orb.style.setProperty('--flare-alpha', alpha.toFixed(3));
       orb.style.boxShadow = `0 0 ${size * 1.4}px hsla(${spec.hue}, 90%, 80%, ${alpha * 0.6})`;
     });
+
+    const streakPulse =  0.1 * Math.sin(pulse + 0.4);
+    flareStreak.style.width = `${streakLength}px`;
+    flareStreak.style.transform = `translate(${sunCenterX}px, ${sunCenterY}px) rotate(${lineAngle}rad) translateX(${streakOffset}px)`;
+    flareStreak.style.opacity = `${streakPulse.toFixed(2)}`;
 
     requestAnimationFrame(animateSun);
   }
