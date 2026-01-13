@@ -80,6 +80,10 @@ body {
   transition: color 0.35s ease-out;
 }
 
+html, body {
+  overflow-x: hidden;
+}
+
 body a { color: #0b2239; }
 
 #sky-layer {
@@ -194,6 +198,36 @@ body a { color: #0b2239; }
   filter: blur(0.4px);
   box-shadow: 0 0 18px rgba(255, 255, 255, 0.25);
 }
+
+#sun-center-marker {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  opacity: 0.65;
+  transform: translate(-50%, -50%);
+}
+
+#sun-center-marker span {
+  position: absolute;
+  background: rgba(255, 80, 80, 0.9);
+}
+
+#sun-center-marker span:first-child {
+  width: 20px;
+  height: 2px;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+#sun-center-marker span:last-child {
+  width: 2px;
+  height: 20px;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+}
 </style>
 <script>
 function setDocHeight() {
@@ -224,6 +258,14 @@ function buildSkyScene() {
 
   const flareStreak = document.createElement('div');
   flareStreak.className = 'flare-streak';
+
+  const showSunCenter = false;
+  const sunCenterMarker = document.createElement('div');
+  sunCenterMarker.id = 'sun-center-marker';
+  sunCenterMarker.innerHTML = '<span></span><span></span>';
+  if (showSunCenter) {
+    flareGroup.appendChild(sunCenterMarker);
+  }
 
   sunGroup.appendChild(sun);
   flareGroup.appendChild(flareLine);
@@ -272,8 +314,9 @@ function buildSkyScene() {
 
     sunGroup.style.transform = `translate(${x}px, ${y}px)`;
 
-    const sunCenterX = x - (sunSize / 2);
-    const sunCenterY = y + sunSize*1.75;
+    const sunRect = sun.getBoundingClientRect();
+    const sunCenterX = sunRect.left + sunRect.width / 2 + window.scrollX;
+    const sunCenterY = sunRect.top + sunRect.height / 2 + window.scrollY;
     const centerX = viewportW * (0.75-progress*0.5);
     const centerY = viewportH * 0.66;
     const dx = centerX - sunCenterX;
@@ -283,6 +326,10 @@ function buildSkyScene() {
 
     flareLine.style.width = `${lineLength}px`;
     flareLine.style.transform = `translate(${sunCenterX}px, ${sunCenterY}px) rotate(${lineAngle}rad)`;
+
+    if (showSunCenter) {
+      sunCenterMarker.style.transform = `translate(${sunCenterX}px, ${sunCenterY}px)`;
+    }
 
     const flarePhase = ((timestamp - animateSun.start) % flareCycle) / flareCycle;
     const pulse = flarePhase * Math.PI * 2;
