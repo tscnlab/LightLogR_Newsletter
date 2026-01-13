@@ -1,6 +1,6 @@
 ---
 title: "LightLogR newsletter"
-subtitle: "December 2025, Edition #02"
+subtitle: "January 2026, Edition #02"
 author: "LightLogR Team"
 format:
   html:
@@ -51,18 +51,66 @@ Read the full changelog in the [LightLogR news section](https://tscnlab.github.i
 
 ---
 
-## Advanced webinar success
+## Open and reproducible analysis of light exposure and visual experience data
 
-On **December 9**, the team hosted the **Open and reproducible analysis of light exposure and visual experience data** webinar in **two sessions**, covering **two of the four advanced use cases**. The sessions offered a deep dive into the LightLogR workflow and showcased how to implement advanced analyses in a transparent, reproducible way.
+[![](assets/02/LLR_Tutorial_Banner.png)](https://tscnlab.github.io/LightLogR_webinar/)
 
-For materials and updates, visit the [LightLogR webinar page](https://tscnlab.github.io/LightLogR_webinar/).
+In October, we started a course series on the [**Open and reproducible analysis of light exposure and visual experience data**](https://tscnlab.github.io/LightLogR_webinar/), covering *beginner* and *advanced* levels. The course is targeted at all researchers that touch base with personal light exposure and visual experience data collected from wearable devices. The goal is to remove friction around common tasks when preparing analyses and combining streams of data through standardized pipelines and reproducible methods. While **LightLogR** sits at the center of this course, it goes beyond the package to explain tidy frameworks, common approaches (and pitfalls) in analysis, and gathers a research community developing and devoliping standards, instead of reinventing the wheel with every project.
+
+The course consists of dynamic (live) and static analysis scripts that cover all the bases. *Live* tutorials run a self‑contained version of R in your browser - no setup required - with only minor functional limitations. *Static* tutorials provide the complete script exactly as you would run it in a local R installation.
+
+In the spirit of openness and reproducibility, the course is completely free of charge, does not require a sign-in, and can be done at any time - just visit the [course website](https://tscnlab.github.io/LightLogR_webinar/). If you would like some additional input on the principles, the tutorials, and a walkthrough, you can register for the free webinar installments of the course:
+
+[**Register here**](https://tum-conf.zoom.us/webinar/register/WN_xGoHi1i_Sz2flC6-qGcLoQ#/registration)
+
+The remaining dates for the 25/26 webinar series are:
+
+- 3 March 2026 8:30 - 10:00 CET (Beginner)
+- 3 March 2026 18:00 - 19:30 CET (Beginner)
+- 6 May 2026 8:30 - 10:00 CEST (Advanced)
+- 6 May 2026 18:00 - 19:30 CEST (Advanced)
+
+Beginner webinars are repeated between the morning and the evening sessions. Advanced webinars cover one use case each. Spreading the webinars to the central european morning and evening means anyone around the world can join without sacrificing (too much) sleep.
+
+Recordings of past webinars are made available on the [course website](https://tscnlab.github.io/LightLogR_webinar/recordings). Participants of the live webinars have the benefit of a live Q&A at the end of each session, get to vote for future content and focus points, and receive a certificate. For a more complete overview, have a look at the [course flyer](https://tscnlab.github.io/LightLogR_webinar/assets/Online_course_series_2025-26.pdf).
+
+## Beginner level
+
+The beginner level takes you from the start and introduces the basic concepts and workflows when working with wearable data and **LightLogR**. It is a great place to get you up and running.
+
+![](assets/02/Live.gif)
+
+## Advanced webinar
+
+The advanced course takes use cases, extracted from real-world examples, to highlight advanced analysis techniques. Each use case contains a short summary on the example and on the focus points as a Preface. The four currently available use cases focus on a variety of typical tasks. Dealing with many participants; multiple time zones; merging contextual information with light data, like sleep/wake or protocol stages; and going beyond light, e.g. when working with spectral or distance data.
+
+![](assets/02/use_cases.png){width=50% fig-align="center"}
 
 ---
 
 ### Thank you to our learners
 
-A special note of appreciation: we sent out **122 certificates** to participants from the beginner and advanced workshops. Thank you for your dedication to open, reproducible research and for being part of this growing community.
+A special note of appreciation: we sent out **122 certificates** to participants from the beginner and advanced webinars. Thank you for your dedication to open, reproducible research and for being part of this growing community.
+
+![](assets/02/certificate.png){width=40% fig-align="center"}
 
 ---
 
 ##### We are thrilled to see LightLogR empowering research teams worldwide and look forward to sharing more tools, courses, and community news soon.{style="text-align: center;"}
+
+## Subscribe & unsubscribe
+
+You can subscribe to this newsletter (and unsubscribe) by visiting the [LightLogR mailing list](https://lists.lrz.de/mailman/listinfo/lightlogr-users).
+
+## Cite
+
+If you want to cite this newsletter, please do so as:
+
+APA: 
+
+> XYZ
+
+
+Harvard: 
+
+> XYZ
