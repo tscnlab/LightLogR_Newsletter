@@ -21,7 +21,19 @@ We are back with another dose of **LightLogR** updates, now under a bright *high
 
 ---
 
-## LightLogR 0.10.0 High noon is here
+## In this newsletter
+
+- [LightLogR 0.10.0 High noon is here](#high-noon-release)
+- [Open and reproducible analysis of light exposure and visual experience data](#open-repro-course)
+  - [Beginner level](#beginner-level)
+  - [Advanced webinar](#advanced-webinar)
+  - [Thank you to our learners](#thank-you-to-our-learners)
+- [Subscribe & unsubscribe](#subscribe-unsubscribe)
+- [Cite](#cite)
+
+---
+
+## LightLogR 0.10.0 High noon is here {#high-noon-release}
 
 The newest release, [**LightLogR 0.10.0 High noon**](https://tscnlab.github.io/LightLogR/news/index.html#lightlogr-0100-high-noon), brings mid-day clarity to your analyses with improvements across the package. Thank you for the continued feedback and energy that made this possible.
 
@@ -51,7 +63,7 @@ Read the full changelog in the [LightLogR news section](https://tscnlab.github.i
 
 ---
 
-## Open and reproducible analysis of light exposure and visual experience data
+## Open and reproducible analysis of light exposure and visual experience data {#open-repro-course}
 
 [![](assets/02/LLR_Tutorial_Banner.png)](https://tscnlab.github.io/LightLogR_webinar/)
 
@@ -74,13 +86,13 @@ Beginner webinars are repeated between the morning and the evening sessions. Adv
 
 Recordings of past webinars are made available on the [course website](https://tscnlab.github.io/LightLogR_webinar/recordings). Participants of the live webinars have the benefit of a live Q&A at the end of each session, get to vote for future content and focus points, and receive a certificate. For a more complete overview, have a look at the [course flyer](https://tscnlab.github.io/LightLogR_webinar/assets/Online_course_series_2025-26.pdf).
 
-## Beginner level
+## Beginner level {#beginner-level}
 
 The beginner level takes you from the start and introduces the basic concepts and workflows when working with wearable data and **LightLogR**. It is a great place to get you up and running.
 
 ![](assets/02/Live.gif)
 
-## Advanced webinar
+## Advanced webinar {#advanced-webinar}
 
 The advanced course takes use cases, extracted from real-world examples, to highlight advanced analysis techniques. Each use case contains a short summary on the example and on the focus points as a Preface. The four currently available use cases focus on a variety of typical tasks. Dealing with many participants; multiple time zones; merging contextual information with light data, like sleep/wake or protocol stages; and going beyond light, e.g. when working with spectral or distance data.
 
@@ -88,7 +100,7 @@ The advanced course takes use cases, extracted from real-world examples, to high
 
 ---
 
-### Thank you to our learners
+### Thank you to our learners {#thank-you-to-our-learners}
 
 A special note of appreciation: we sent out **122 certificates** to participants from the beginner and advanced webinars. Thank you for your dedication to open, reproducible research and for being part of this growing community.
 
@@ -98,11 +110,11 @@ A special note of appreciation: we sent out **122 certificates** to participants
 
 ##### We are thrilled to see LightLogR empowering research teams worldwide and look forward to sharing more tools, courses, and community news soon.{style="text-align: center;"}
 
-## Subscribe & unsubscribe
+## Subscribe & unsubscribe {#subscribe-unsubscribe}
 
 You can subscribe to this newsletter (and unsubscribe) by visiting the [LightLogR mailing list](https://lists.lrz.de/mailman/listinfo/lightlogr-users).
 
-## Cite
+## Cite {#cite}
 
 If you want to cite this newsletter, please do so as:
 
