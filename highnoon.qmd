@@ -127,6 +127,16 @@ body a { color: #0b2239; }
   transform-origin: 0 50%;
 }
 
+.flare-ray {
+  position: absolute;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.05) 85%, rgba(255, 255, 255, 0) 100%);
+  mix-blend-mode: screen;
+  filter: blur(0.2px);
+  opacity: 0.12;
+  transform-origin: 0 50%;
+}
+
 .flare-streak {
   position: absolute;
   height: 6px;
@@ -205,6 +215,19 @@ function buildSkyScene() {
   const flareLine = document.createElement('div');
   flareLine.id = 'flare-line';
 
+  const flareRayCount = 6;
+  const flareRaySpecs = Array.from({ length: flareRayCount }, () => ({
+    angle: Math.random() * Math.PI * 2,
+    length: 60 + Math.random() * 160,
+    drift: (Math.random() * 2 - 1) * 0.18,
+    phase: Math.random() * Math.PI * 2
+  }));
+  const flareRays = flareRaySpecs.map(() => {
+    const ray = document.createElement('div');
+    ray.className = 'flare-ray';
+    return ray;
+  });
+
   const flareStreak = document.createElement('div');
   flareStreak.className = 'flare-streak';
 
@@ -218,6 +241,7 @@ function buildSkyScene() {
 
   sunGroup.appendChild(sun);
   flareGroup.appendChild(flareLine);
+  flareRays.forEach((ray) => flareGroup.appendChild(ray));
   flareGroup.appendChild(flareStreak);
 
   document.body.prepend(cloudLayer);
@@ -276,12 +300,25 @@ function buildSkyScene() {
     flareLine.style.width = `${lineLength}px`;
     flareLine.style.transform = `translate(${sunCenterX}px, ${sunCenterY}px) rotate(${lineAngle}rad)`;
 
+    const flarePhase = ((timestamp - animateSun.start) % flareCycle) / flareCycle;
+    const pulse = flarePhase * Math.PI * 2;
+
+    flareRays.forEach((ray, index) => {
+      const spec = flareRaySpecs[index];
+      const rayPulse = Math.sin(pulse + spec.phase);
+      const rayLength = spec.length * (0.75 + 0.35 * Math.abs(rayPulse));
+      const rayAngle = spec.angle + spec.drift * rayPulse;
+      const rayOpacity = Math.max(0, 0.08 + 0.12 * Math.abs(rayPulse));
+
+      ray.style.width = `${rayLength.toFixed(1)}px`;
+      ray.style.transform = `translate(${sunCenterX}px, ${sunCenterY}px) rotate(${rayAngle}rad)`;
+      ray.style.opacity = rayOpacity.toFixed(2);
+    });
+
     if (showSunCenter) {
       sunCenterMarker.style.transform = `translate(${sunCenterX}px, ${sunCenterY}px)`;
     }
 
-    const flarePhase = ((timestamp - animateSun.start) % flareCycle) / flareCycle;
-    const pulse = flarePhase * Math.PI * 2;
     const streakOffset = lineLength * 0.18;
     const streakLength = lineLength * 0.6;
 
