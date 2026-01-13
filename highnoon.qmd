@@ -110,33 +110,28 @@ body a { color: #0b2239; }
   to   { transform: translateX(120vw); }
 }
 
-#sun-flare {
+#flare-group {
   position: absolute;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.32);
-  box-shadow: 0 0 22px rgba(255, 255, 255, 0.45);
+  inset: 0;
   z-index: -2;
   pointer-events: none;
-  animation: flarePulse 7s ease-in-out infinite;
 }
 
-#sun-flare::after {
-  content: "";
+#flare-line {
   position: absolute;
-  top: 22px;
-  left: 22px;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 0 28px rgba(255, 255, 255, 0.3);
+  height: 2px;
+  background: rgba(255, 255, 255, 0.35);
+  opacity: 0;
+  /* Debug hint: set opacity to 0.35 to reveal the flare alignment line. */
+  transform-origin: 0 50%;
 }
 
-@keyframes flarePulse {
-  0%, 100% { opacity: 0.4; transform: scale(0.85); }
-  50% { opacity: 0.7; transform: scale(1.1); }
+.flare-orb {
+  position: absolute;
+  border-radius: 50%;
+  mix-blend-mode: screen;
+  filter: blur(0.2px);
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.2);
 }
 </style>
 
@@ -161,19 +156,39 @@ function buildSkyScene() {
   const sun = document.createElement('div');
   sun.id = 'sun';
 
-  const flare = document.createElement('div');
-  flare.id = 'sun-flare';
+  const flareGroup = document.createElement('div');
+  flareGroup.id = 'flare-group';
+
+  const flareLine = document.createElement('div');
+  flareLine.id = 'flare-line';
 
   sunGroup.appendChild(sun);
+  flareGroup.appendChild(flareLine);
 
   document.body.prepend(cloudLayer);
-  document.body.prepend(flare);
+  document.body.prepend(flareGroup);
   document.body.prepend(sunGroup);
   document.body.prepend(sky);
 
-  const flareSize = 14;
   const sunSize = 64;
   const arcDuration = 60000;
+  const flareCycle = 7000;
+
+  const flareSpecs = [
+    { distance: 0.22, size: 18, hue: 45, opacity: 0.35, phase: 0.0 },
+    { distance: 0.48, size: 26, hue: 190, opacity: 0.25, phase: 1.7 },
+    { distance: 0.72, size: 34, hue: 310, opacity: 0.18, phase: 3.1 }
+  ];
+
+  const flareOrbs = flareSpecs.map((spec) => {
+    const orb = document.createElement('div');
+    orb.className = 'flare-orb';
+    orb.style.background = `hsla(${spec.hue}, 85%, 78%, ${spec.opacity})`;
+    orb.style.width = `${spec.size}px`;
+    orb.style.height = `${spec.size}px`;
+    flareGroup.appendChild(orb);
+    return orb;
+  });
 
   function animateSun(timestamp) {
     if (!animateSun.start) animateSun.start = timestamp;
@@ -196,10 +211,32 @@ function buildSkyScene() {
     const centerY = viewportH;
     const dx = centerX - sunCenterX;
     const dy = centerY - sunCenterY;
-    const flareX = sunCenterX - dx * 0.35 - flareSize / 2;
-    const flareY = sunCenterY - dy * 0.35 - flareSize / 2;
+    const lineLength = Math.hypot(dx, dy);
+    const lineAngle = Math.atan2(dy, dx);
 
-    flare.style.transform = `translate(${flareX}px, ${flareY}px)`;
+    flareLine.style.width = `${lineLength}px`;
+    flareLine.style.transform = `translate(${sunCenterX}px, ${sunCenterY}px) rotate(${lineAngle}rad)`;
+
+    const flarePhase = ((timestamp - animateSun.start) % flareCycle) / flareCycle;
+    const pulse = flarePhase * Math.PI * 2;
+
+    flareOrbs.forEach((orb, index) => {
+      const spec = flareSpecs[index];
+      const offset = Math.sin(pulse + spec.phase);
+      const drift = spec.distance + offset * 0.04;
+      const size = spec.size * (1 + 0.12 * Math.cos(pulse + spec.phase));
+      const alpha = Math.min(0.6, Math.max(0.05, spec.opacity + 0.12 * offset));
+
+      const orbX = sunCenterX + dx * drift - size / 2;
+      const orbY = sunCenterY + dy * drift - size / 2;
+
+      orb.style.transform = `translate(${orbX}px, ${orbY}px)`;
+      orb.style.width = `${size}px`;
+      orb.style.height = `${size}px`;
+      orb.style.background = `hsla(${spec.hue}, 85%, 78%, ${alpha})`;
+      orb.style.boxShadow = `0 0 ${size * 1.4}px hsla(${spec.hue}, 90%, 80%, ${alpha * 0.6})`;
+    });
+
     requestAnimationFrame(animateSun);
   }
 
