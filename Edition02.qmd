@@ -25,9 +25,7 @@ We are back with another dose of **LightLogR** updates, now under a bright *high
 
 - [LightLogR 0.10.0 High noon is here](#high-noon-release)
 - [Open and reproducible analysis of light exposure and visual experience data](#open-repro-course)
-  - [Beginner level](#beginner-level)
-  - [Advanced webinar](#advanced-webinar)
-  - [Thank you to our learners](#thank-you-to-our-learners)
+- [New publications and datasets](#new-papers)
 - [Subscribe & unsubscribe](#subscribe-unsubscribe)
 - [Cite](#cite)
 
@@ -71,6 +69,8 @@ In October, we started a course series on the [**Open and reproducible analysis 
 
 The course consists of dynamic (live) and static analysis scripts that cover all the bases. *Live* tutorials run a self‑contained version of R in your browser - no setup required - with only minor functional limitations. *Static* tutorials provide the complete script exactly as you would run it in a local R installation.
 
+![](assets/02/Live.gif)
+
 In the spirit of openness and reproducibility, the course is completely free of charge, does not require a sign-in, and can be done at any time - just visit the [course website](https://tscnlab.github.io/LightLogR_webinar/). If you would like some additional input on the principles, the tutorials, and a walkthrough, you can register for the free webinar installments of the course:
 
 [**Register here**](https://tum-conf.zoom.us/webinar/register/WN_xGoHi1i_Sz2flC6-qGcLoQ#/registration)
@@ -90,8 +90,6 @@ Recordings of past webinars are made available on the [course website](https://t
 
 The beginner level takes you from the start and introduces the basic concepts and workflows when working with wearable data and **LightLogR**. It is a great place to get you up and running.
 
-![](assets/02/Live.gif)
-
 ## Advanced webinar {#advanced-webinar}
 
 The advanced course takes use cases, extracted from real-world examples, to highlight advanced analysis techniques. Each use case contains a short summary on the example and on the focus points as a Preface. The four currently available use cases focus on a variety of typical tasks. Dealing with many participants; multiple time zones; merging contextual information with light data, like sleep/wake or protocol stages; and going beyond light, e.g. when working with spectral or distance data.
@@ -109,6 +107,8 @@ A special note of appreciation: we sent out **122 certificates** to participants
 ---
 
 ##### We are thrilled to see LightLogR empowering research teams worldwide and look forward to sharing more tools, courses, and community news soon.{style="text-align: center;"}
+
+## New publications and datasets {#new-papers}
 
 ## Subscribe & unsubscribe {#subscribe-unsubscribe}
 
