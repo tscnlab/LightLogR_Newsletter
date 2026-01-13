@@ -170,14 +170,14 @@ function buildSkyScene() {
   document.body.prepend(sunGroup);
   document.body.prepend(sky);
 
-  const sunSize = 64;
+  const sunSize = 100;
   const arcDuration = 60000;
   const flareCycle = 7000;
 
   const flareSpecs = [
-    { distance: 0.22, size: 18, hue: 45, opacity: 0.35, phase: 0.0 },
-    { distance: 0.48, size: 26, hue: 190, opacity: 0.25, phase: 1.7 },
-    { distance: 0.72, size: 34, hue: 310, opacity: 0.18, phase: 3.1 }
+    { distance: 0.3, size: 18, hue: 45, opacity: 0.35, phase: 0.0 },
+    { distance: 0.55, size: 26, hue: 190, opacity: 0.25, phase: 1.7 },
+    { distance: 0.8, size: 34, hue: 310, opacity: 0.18, phase: 3.1 }
   ];
 
   const flareOrbs = flareSpecs.map((spec) => {
@@ -199,14 +199,14 @@ function buildSkyScene() {
     const viewportH = window.innerHeight;
 
     const x = (-0.1 + 1.2 * progress) * viewportW;
-    const arcHeight = 0.1 * viewportH;
+    const arcHeight = 0.2 * viewportH;
     const baseHeight = 0.14 * viewportH;
     const y = baseHeight - arcHeight * Math.sin(Math.PI * progress);
 
     sunGroup.style.transform = `translate(${x}px, ${y}px)`;
 
-    const sunCenterX = x + sunSize / 2;
-    const sunCenterY = y + sunSize / 2;
+    const sunCenterX = x - sunSize / 1.9;
+    const sunCenterY = y + sunSize*1.4;
     const centerX = viewportW * 0.5;
     const centerY = viewportH;
     const dx = centerX - sunCenterX;
