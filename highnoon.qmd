@@ -228,6 +228,7 @@ function buildSkyScene() {
   const sunSize = 100;
   const arcDuration = 60000;
   const flareCycle = 7000;
+  const sunIntroLead = 2000;
 
   const flareSpecs = [
     { distance: 0.15, size: 16, hue: 42, opacity: 0.18, phase: 0.0 },
@@ -249,7 +250,7 @@ function buildSkyScene() {
   });
 
   function animateSun(timestamp) {
-    if (!animateSun.start) animateSun.start = timestamp;
+    if (!animateSun.start) animateSun.start = timestamp - sunIntroLead;
     const elapsed = (timestamp - animateSun.start) % arcDuration;
     const progress = elapsed / arcDuration;
 

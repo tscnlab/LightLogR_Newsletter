@@ -2,6 +2,7 @@
 title: "LightLogR newsletter"
 subtitle: "January 2026, Edition #02"
 author: "LightLogR Team"
+doi: 10.5281/zenodo.18267830
 format:
   html:
     self-contained: true
@@ -10,56 +11,188 @@ format:
     toc: false
     code-link: true
 lang: en
+---
 
----
-![](assets/logo_lightlogr.png){width="15%"}
----
+## ![](assets/logo_lightlogr.png){width="15%"}
 
 {{< include highnoon.qmd >}}
 
-We are back with another dose of **LightLogR** updates, now under a bright *high noon* sky.
-
----
+We are back with another dose of **LightLogR** updates, now under a bright *high noon* sky. <!-- {style="color: white;"} --> ---
 
 ## In this newsletter
 
-- [LightLogR 0.10.0 High noon is here](#high-noon-release)
-- [Open and reproducible analysis of light exposure and visual experience data](#open-repro-course)
-- [New publications and datasets](#new-papers)
-- [Subscribe & unsubscribe](#subscribe-unsubscribe)
-- [Cite](#cite)
+-   [LightLogR 0.10.0 High noon is here](#high-noon-release)
+-   [Open and reproducible analysis of light exposure and visual experience data](#open-repro-course)
+-   [Global Light Commons: Shaping the Future of Light Data](#glee)
+-   [Subscribe & unsubscribe](#subscribe-unsubscribe)
+-   [Cite](#cite)
 
----
+------------------------------------------------------------------------
 
 ## LightLogR 0.10.0 High noon is here {#high-noon-release}
 
 The newest release, [**LightLogR 0.10.0 High noon**](https://tscnlab.github.io/LightLogR/news/index.html#lightlogr-0100-high-noon), brings mid-day clarity to your analyses with improvements across the package. Thank you for the continued feedback and energy that made this possible.
 
-:::{.columns}
+```{r}
+#| eval: false
+install.packages("LightLogR")
+library(LightLogR)
+```
 
-::: {.column width="52%"}
-::: {.callout}
-### What’s new in High noon
-- Fresh enhancements and refinements for a smoother analysis workflow.
-- Expanded tools to support advanced use cases in light exposure research.
-- Continued focus on stability and reproducibility.
-:::
+### Highlights in v0.10.0 High noon
+
+Switch between the tabs to see a selecton of new additions to the package.
+
+::: {.panel-tabset}
+
+### Summaries
+
+#### Summary table with helpful overview and common light exposure metrics
+
+```{r}
+#| eval: false
+data |> summary_table()
+```
+
+![](assets/02/table_summary.png){width="75%" fig-align="center"} 
+
+Access overview and metric functions separately with `summary_overview()` and `summary_metrics()`
+
+### Group selection
+
+#### Quickly select individuals/groups based on number, summary metric, or randomly:
+
+```{r}
+#| eval: false
+#return the three topmost groups
+data |> sample_groups(n=3) 
+```
+
+```{r}
+#| eval: false
+#return a random group
+data |> sample_groups(sample="random")
+```
+
+```{r}
+#| eval: false
+#return the group with the highest average melanopic EDI
+data |> sample_groups(order.by = mean(MEDI)) 
+```
+
+```{r}
+#| eval: false
+#return all groups with a median MEDI value above 1000
+data |> sample_groups(condition = median(MEDI) > 1000) 
+```
+
+Combine these arguments to get quick access to exactly the participants and groups you need
+
+### Versioning
+
+#### Support for multiple file format versions
+
+File formats evolve over time. `LightLogR` is now ready when things change, e.g., through a software update. Simply specify the version you need.
+
+```{r}
+#| eval: false
+import$VEET(file, version = "2.1.7")
+```
+
+How do you know which formats are available and how they differ? And which one is the default when you don't specify anything? Look under `supported_versions()`
+
+```{r}
+#| eval: false
+supported_versions(device = "VEET") 
+```
+
+![](assets/02/versioning.png)
+
+### State viz
+
+#### Individual heights for states
+
+Before 0.10.0 High noon, states and photoperiods would always be displayed as panel-filling. In some cases this could be confusing, now, states can have their `ymin` and `ymax` aesthetic to add the infromation where you want it specifically, add states and photoperiods at the same time, or even add multiple states with multiple heights.
+
+Switch between the tabs to see the difference.
+
+:::{.panel-tabset}
+
+##### old
+
+```{r}
+#| eval: false
+data |> 
+  Brown_cut() |> 
+  gg_days() |> 
+  gg_states(state, aes_fill = state)
+```
+
+![](assets/02/states_old.png){width=80% fig-align="center"}
+
+##### new
+
+```{r}
+#| eval: false
+data |> 
+  Brown_cut() |> 
+  gg_days() |> 
+  gg_states(state, aes_fill = state, ymax = 0, alpha = 1)
+```
+
+![](assets/02/states_new.png){width=80% fig-align="center"}
 :::
 
-::: {.column width="6%"}
-<!-- empty spacer column -->
+### Circular time
+
+Time of day is circular, but datetimes are not. This regularly leads to problems, when calculating with them, because what happens mathematically, e.g., during averaging, is not always what we intend. E.g., consider these datetimes:
+
+![](assets/02/time.png){width=20%}
+
+Depending on what these indicate, we might need a linear or a circular representation of time-of-day. Let's say they indicate bedtimes, some after, and some before midnight. We try both approaches to calculate the average bedtime.
+Switch between the tabs to see the difference.
+
+:::{.panel-tabset}
+
+##### linear
+
+```{r}
+#| eval: false
+data |> 
+  Datetime2Time() |> 
+  summarize_numeric()
+```
+
+![](assets/02/linear_time.png){width=67%}
+
+In linear time, time-of-day is stored as seconds from midnight. Accordingly, the average is around 10 in the morning - which is not sensible in the context of this example. Thus we have to switch to circular time
+
+Note that we converted datetimes to times prior to averaging. If we had averaged datetimes, the date-component would have added another layer of complexity. 
+
+##### circular
+
+```{r}
+#| eval: false
+data |> 
+  Datetime2Time(circular = TRUE) |> 
+  summarize_numeric() |> Circular2Time()
+```
+
+![](assets/02/circular_time.png)
+
+Circular time is represented as angles on a circular system. When these are averaged, the distance between two points on the circle is relevant, not where the circle starts or ends. Thus, we get a sensible average, which, in this case, is about 3-4 minutes past midnight.
+
+Note that **LightLogR 0.10.0 High noon** uses the [`circular`](https://CRAN.R-project.org/package=circular) package to implement this functionality.
+
 :::
 
-::: {.column width="42%"}
-::: {.callout}
+:::
+
 ### Explore the release notes
+
 Read the full changelog in the [LightLogR news section](https://tscnlab.github.io/LightLogR/news/index.html#lightlogr-0100-high-noon).
-:::
-:::
 
-:::
-
----
+------------------------------------------------------------------------
 
 ## Open and reproducible analysis of light exposure and visual experience data {#open-repro-course}
 
@@ -73,42 +206,59 @@ The course consists of dynamic (live) and static analysis scripts that cover all
 
 In the spirit of openness and reproducibility, the course is completely free of charge, does not require a sign-in, and can be done at any time - just visit the [course website](https://tscnlab.github.io/LightLogR_webinar/). If you would like some additional input on the principles, the tutorials, and a walkthrough, you can register for the free webinar installments of the course:
 
+::: {.callout}
+
 [**Register here**](https://tum-conf.zoom.us/webinar/register/WN_xGoHi1i_Sz2flC6-qGcLoQ#/registration)
 
 The remaining dates for the 25/26 webinar series are:
 
-- 3 March 2026 8:30 - 10:00 CET (Beginner)
-- 3 March 2026 18:00 - 19:30 CET (Beginner)
-- 6 May 2026 8:30 - 10:00 CEST (Advanced)
-- 6 May 2026 18:00 - 19:30 CEST (Advanced)
+-   3 March 2026 8:30 - 10:00 CET (Beginner)
+-   3 March 2026 18:00 - 19:30 CET (Beginner)
+-   6 May 2026 8:30 - 10:00 CEST (Advanced)
+-   6 May 2026 18:00 - 19:30 CEST (Advanced)
 
 Beginner webinars are repeated between the morning and the evening sessions. Advanced webinars cover one use case each. Spreading the webinars to the central european morning and evening means anyone around the world can join without sacrificing (too much) sleep.
 
 Recordings of past webinars are made available on the [course website](https://tscnlab.github.io/LightLogR_webinar/recordings). Participants of the live webinars have the benefit of a live Q&A at the end of each session, get to vote for future content and focus points, and receive a certificate. For a more complete overview, have a look at the [course flyer](https://tscnlab.github.io/LightLogR_webinar/assets/Online_course_series_2025-26.pdf).
 
-## Beginner level {#beginner-level}
-
-The beginner level takes you from the start and introduces the basic concepts and workflows when working with wearable data and **LightLogR**. It is a great place to get you up and running.
-
-## Advanced webinar {#advanced-webinar}
-
-The advanced course takes use cases, extracted from real-world examples, to highlight advanced analysis techniques. Each use case contains a short summary on the example and on the focus points as a Preface. The four currently available use cases focus on a variety of typical tasks. Dealing with many participants; multiple time zones; merging contextual information with light data, like sleep/wake or protocol stages; and going beyond light, e.g. when working with spectral or distance data.
-
-![](assets/02/use_cases.png){width=50% fig-align="center"}
-
----
+:::
 
 ### Thank you to our learners {#thank-you-to-our-learners}
 
 A special note of appreciation: we sent out **122 certificates** to participants from the beginner and advanced webinars. Thank you for your dedication to open, reproducible research and for being part of this growing community.
 
-![](assets/02/certificate.png){width=40% fig-align="center"}
+![](assets/02/certificate.png){width="40%" fig-align="center"}
 
----
+------------------------------------------------------------------------
 
-##### We are thrilled to see LightLogR empowering research teams worldwide and look forward to sharing more tools, courses, and community news soon.{style="text-align: center;"}
+##### We are thrilled to see LightLogR empowering research teams worldwide and look forward to sharing more tools, courses, and community news soon. {style="text-align: center;"}
 
-## New publications and datasets {#new-papers}
+## **Global Light Commons**: Shaping the Future of Light Data {#glee}
+
+Our "big build", the **Global Light Commons** (a [GLEE initiative](https://www.visualdiet.org)) has been busy as we are meeting with light enthusiasts across continents to understand the needs of our community globally.
+
+### Our Vision
+
+Our goal is to build a shared, open infrastructure for light exposure data. We want to ensure this data is:
+
+-   Findable and accessible to all.
+-   Usable across different sectors.
+-   Reproducible for rigorous science, informed policy, and improved public health.
+
+### Collaborative Insights
+
+We have been privileged to welcome researchers, government representatives, NGOs, and thought leaders to the table. Together, we’ve explored what sustainable data collection looks like, how to ensure a collective legacy, and the best ways to integrate with existing frameworks.
+
+While we are often working toward different specific outcomes, these conversations have unearthed some shared truths felt throughout our community:
+
+-   The constant pressure to "publish or perish."
+-   Existing workflows that unfortunately do not prioritize data upload or open publication.
+
+### Join the Conversation
+
+Each conversation grounds us in a shared vision for the future. We believe this infrastructure must be built with the community, not just for it.
+
+We want to hear from you. If you have perspectives or experiences to share, please get in touch via the [GLEE homepage](https://www.visualdiet.org).
 
 ## Subscribe & unsubscribe {#subscribe-unsubscribe}
 
@@ -118,11 +268,10 @@ You can subscribe to this newsletter (and unsubscribe) by visiting the [LightLog
 
 If you want to cite this newsletter, please do so as:
 
-APA: 
+APA:
 
-> XYZ
+> Zauner, J., Tsukimori, E., & Spitschan, M. (2026, January). LightLogR newsletter (No. 02). https://doi.org/10.5281/zenodo.18267830
 
+Harvard:
 
-Harvard: 
-
-> XYZ
+> Zauner, J., Tsukimori, E. & Spitschan, M. 2026. LightLogR Newsletter, no. 2, January. Available at: https://doi.org/10.5281/zenodo.18267830 (Published 19 January 2026).
