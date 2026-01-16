@@ -54,7 +54,7 @@ Switch between the tabs to see a selecton of new additions to the package.
 data |> summary_table()
 ```
 
-![](assets/02/table_summary.png){width="75%" fig-align="center"} 
+![](assets/02/table_summary.png){width="60%" fig-align="center"} 
 
 Access overview and metric functions separately with `summary_overview()` and `summary_metrics()`
 
@@ -270,7 +270,7 @@ If you want to cite this newsletter, please do so as:
 
 APA:
 
-> Zauner, J., Tsukimori, E., & Spitschan, M. (2026, January). LightLogR newsletter (No. 02). https://doi.org/10.5281/zenodo.18267830
+> Zauner, J., Thalji, S., Tsukimori, E., & Spitschan, M. (2026, January). LightLogR newsletter (No. 02). https://doi.org/10.5281/zenodo.18267830
 
 Harvard:
 

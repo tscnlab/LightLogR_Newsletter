@@ -64,6 +64,7 @@ ul.task-list li input[type="checkbox"] {
 html, body {
   height: auto !important;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .page-columns,
@@ -76,15 +77,76 @@ html, body {
 body {
   margin: 0;
   position: relative;
-  color: #0b2239;
+  color: #f7fbff;
+  box-shadow: 2px 2px black
   transition: color 0.35s ease-out;
 }
 
-html, body {
-  overflow-x: hidden;
+body a {
+  color: #ffd166;
+  text-decoration-color: rgba(255, 209, 102, 0.8);
 }
 
-body a { color: #0b2239; }
+body.scrolled-half {
+  color: #0b2239;
+}
+
+body.scrolled-half a {
+  color: #914000;
+  text-decoration-color: rgba(145, 64, 0, 0.8);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: inherit;
+}
+
+.panel-tabset {
+  color: #0b2239;
+}
+
+.panel-tabset .tab-content {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  padding: 1.1rem 1.2rem;
+  box-shadow: 0 8px 18px rgba(11, 34, 57, 0.08);
+}
+
+.panel-tabset .nav-tabs {
+  background: rgba(255, 255, 255, 0);
+  border-radius: 12px 12px 0 0;
+  padding: 0.35rem 0.5rem;
+  border: none;
+}
+
+.panel-tabset .nav-tabs .nav-link {
+  color: #ffd166;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  border: none;
+}
+
+.panel-tabset .nav-tabs .nav-link.active {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 999px;
+  color: #0b2239;
+}
+
+.panel-tabset a {
+  color: #0b2239;
+  text-decoration-color: rgba(11, 34, 57, 0.6);
+}
+
+.callout {
+  background: rgba(255, 255, 255, 0.88) !important;
+  color: #0b2239 !important;
+  border-left: 4px solid #f2b134 !important;
+  box-shadow: 0 8px 16px rgba(11, 34, 57, 0.08);
+}
+
+.callout a {
+  color: #0b2239;
+  text-decoration-color: rgba(11, 34, 57, 0.6);
+}
 
 #sky-layer {
   position: absolute;
@@ -237,6 +299,15 @@ function setDocHeight() {
 window.addEventListener('load',  setDocHeight);
 window.addEventListener('resize', setDocHeight);
 
+function updateTextContrast() {
+  const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = scrollable > 0 ? window.scrollY / scrollable : 0;
+  document.body.classList.toggle('scrolled-half', progress >= 0.5);
+}
+window.addEventListener('load', updateTextContrast);
+window.addEventListener('scroll', updateTextContrast, { passive: true });
+window.addEventListener('resize', updateTextContrast);
+
 function buildSkyScene() {
   const sky = document.createElement('div');
   sky.id = 'sky-layer';
@@ -279,6 +350,7 @@ function buildSkyScene() {
   const sunSize = 100;
   const arcDuration = 60000;
   const flareCycle = 7000;
+  const sunIntroLead = 2000;
 
   const flareSpecs = [
     { distance: 0.15, size: 16, hue: 42, opacity: 0.18, phase: 0.0 },
@@ -300,7 +372,7 @@ function buildSkyScene() {
   });
 
   function animateSun(timestamp) {
-    if (!animateSun.start) animateSun.start = timestamp;
+    if (!animateSun.start) animateSun.start = timestamp - sunIntroLead;
     const elapsed = (timestamp - animateSun.start) % arcDuration;
     const progress = elapsed / arcDuration;
 
