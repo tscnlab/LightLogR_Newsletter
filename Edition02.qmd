@@ -17,7 +17,7 @@ lang: en
 
 {{< include highnoon.qmd >}}
 
-We are back with another dose of **LightLogR** updates, now under a bright *high noon* sky. <!-- {style="color: white;"} --> ---
+We are back with another dose of **LightLogR** updates, now under a bright *high noon* sky. <!-- {style="color: white;"} -->
 
 ## In this newsletter
 
