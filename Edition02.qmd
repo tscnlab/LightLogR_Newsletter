@@ -112,7 +112,7 @@ supported_versions(device = "VEET")
 
 #### Individual heights for states
 
-Before 0.10.0 High noon, states and photoperiods would always be displayed as panel-filling. In some cases this could be confusing, now, states can have their `ymin` and `ymax` aesthetic to add the infromation where you want it specifically, add states and photoperiods at the same time, or even add multiple states with multiple heights.
+Before 0.10.0 High noon, states and photoperiods would always be displayed as panel-filling. In some cases this could be confusing. Now, states can have their `ymin` and `ymax` aesthetic to add the information where you want it specifically, add states and photoperiods at the same time, or even add multiple states with multiple heights.
 
 Switch between the tabs to see the difference.
 
@@ -145,7 +145,7 @@ data |>
 
 ### Circular time
 
-Time of day is circular, but datetimes are not. This regularly leads to problems, when calculating with them, because what happens mathematically, e.g., during averaging, is not always what we intend. E.g., consider these datetimes:
+Time of day is circular, but datetimes are not. This regularly leads to problems when calculating with them, because what happens mathematically, e.g., during averaging, is not always what we intend. E.g., consider these datetimes:
 
 ![](assets/02/time.png){width=20%}
 
