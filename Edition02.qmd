@@ -21,17 +21,18 @@ We are back with another dose of **LightLogR** updates, now under a bright *high
 
 ## In this newsletter
 
--   [LightLogR 0.10.0 High noon is here](#high-noon-release)
+-   [LightLogR 0.10.0 *High noon* is here](#high-noon-release)
 -   [Open and reproducible analysis of light exposure and visual experience data](#open-repro-course)
+-   [LightLogR in publications and projects](#publications)
 -   [Global Light Commons: Shaping the Future of Light Data](#glee)
 -   [Subscribe & unsubscribe](#subscribe-unsubscribe)
 -   [Cite](#cite)
 
 ------------------------------------------------------------------------
 
-## LightLogR 0.10.0 High noon is here {#high-noon-release}
+## LightLogR 0.10.0 *High noon* is here {#high-noon-release}
 
-The newest release, [**LightLogR 0.10.0 High noon**](https://tscnlab.github.io/LightLogR/news/index.html#lightlogr-0100-high-noon), brings mid-day clarity to your analyses with improvements across the package. Thank you for the continued feedback and energy that made this possible.
+The newest release, [**LightLogR 0.10.0 *High noon***](https://tscnlab.github.io/LightLogR/news/index.html#lightlogr-0100-high-noon), brings mid-day clarity to your analyses with improvements across the package. Thank you for the continued feedback and energy that made this possible.
 
 ```{r}
 #| eval: false
@@ -39,7 +40,7 @@ install.packages("LightLogR")
 library(LightLogR)
 ```
 
-### Highlights in v0.10.0 High noon
+### Highlights in v0.10.0 *High noon*
 
 Switch between the tabs to see a selecton of new additions to the package.
 
@@ -112,7 +113,7 @@ supported_versions(device = "VEET")
 
 #### Individual heights for states
 
-Before 0.10.0 High noon, states and photoperiods would always be displayed as panel-filling. In some cases this could be confusing. Now, states can have their `ymin` and `ymax` aesthetic to add the information where you want it specifically, add states and photoperiods at the same time, or even add multiple states with multiple heights.
+Before 0.10.0 *High noon*, states and photoperiods would always be displayed as panel-filling. In some cases this could be confusing. Now, states can have their `ymin` and `ymax` aesthetic to add the information where you want it specifically, add states and photoperiods at the same time, or even add multiple states with multiple heights.
 
 Switch between the tabs to see the difference.
 
@@ -165,7 +166,7 @@ data |>
 
 ![](assets/02/linear_time.png){width=67%}
 
-In linear time, time-of-day is stored as seconds from midnight. Accordingly, the average is around 10 in the morning - which is not sensible in the context of this example. Thus we have to switch to circular time
+In linear time, time-of-day is stored as seconds from midnight. Accordingly, the average is around 10 in the morning - which is not sensible in the context of this example. Thus we have to switch to circular time.
 
 Note that we converted datetimes to times prior to averaging. If we had averaged datetimes, the date-component would have added another layer of complexity. 
 
@@ -182,7 +183,7 @@ data |>
 
 Circular time is represented as angles on a circular system. When these are averaged, the distance between two points on the circle is relevant, not where the circle starts or ends. Thus, we get a sensible average, which, in this case, is about 3-4 minutes past midnight.
 
-Note that **LightLogR 0.10.0 High noon** uses the [`circular`](https://CRAN.R-project.org/package=circular) package to implement this functionality.
+Note that **LightLogR 0.10.0 *High noon*** uses the [`circular`](https://CRAN.R-project.org/package=circular) package to implement this functionality.
 
 :::
 
@@ -212,10 +213,10 @@ In the spirit of openness and reproducibility, the course is completely free of 
 
 The remaining dates for the 25/26 webinar series are:
 
--   3 March 2026 8:30 - 10:00 CET (Beginner)
--   3 March 2026 18:00 - 19:30 CET (Beginner)
--   6 May 2026 8:30 - 10:00 CEST (Advanced)
--   6 May 2026 18:00 - 19:30 CEST (Advanced)
+-   Tuesday, 3 March 2026 8:30 - 10:00 CET (Beginner)
+-   Tuesday, 3 March 2026 18:00 - 19:30 CET (Beginner)
+-   Wednesday, 6 May 2026 8:30 - 10:00 CEST (Advanced)
+-   Wednesday, 6 May 2026 18:00 - 19:30 CEST (Advanced)
 
 Beginner webinars are repeated between the morning and the evening sessions. Advanced webinars cover one use case each. Spreading the webinars to the central european morning and evening means anyone around the world can join without sacrificing (too much) sleep.
 
@@ -229,9 +230,30 @@ A special note of appreciation: we sent out **122 certificates** to participants
 
 ![](assets/02/certificate.png){width="40%" fig-align="center"}
 
+## LightLogR in publications and projects {#publications}
+
+We are happy to share publications and activities from 2025 that use or feature *LightLogR*:
+
+- Biller & Zauner et al.: [Physiologically-relevant light exposure and light behaviour in Switzerland and Malaysia](https://pubmed.ncbi.nlm.nih.gov/41339708/)
+- Guidolin et al.: [Collecting, detecting, and handling non-wear intervals in longitudinal light exposure data](https://pmc.ncbi.nlm.nih.gov/articles/PMC12795912/)
+- Hartmeyer et al.: [Multi-Wearable Approach for Monitoring Diurnal Light Exposure and Body Rhythms in Nightshift Workers](https://doi.org/10.1111/apha.70069)
+- Fazlali et al.: [Sex and Seasonal Variations in Melatonin Suppression and Alerting Response to Light](https://doi.org/10.1210/jendso/bvaf155)
+- Lazar et al.: [Afternoon to early evening bright light exposure reduces later melatonin production in adolescents](https://www.nature.com/articles/s44323-025-00040-6)
+- Murukesu et al.: [A day in Daylight (dashboard)](https://tscnlab.github.io/2025_ADayInDaylight/)
+- Zauner & Stefani et al.(in print): [Auxiliary data, quality assurance and quality control for wearable light loggers and optical radiation dosimeters](https://www.biorxiv.org/content/10.1101/2025.09.11.675633v3)
+- Zauner et al.: [How to Deal With Darkness: Modeling and Visualization of Zero-Inflated Personal Light Exposure Data on a Logarithmic Scale](https://journals.sagepub.com/doi/10.1177/07487304251336624)
+- Zauner et al.: [LightLogR: Reproducible analysis of personal light exposure data](https://pmc.ncbi.nlm.nih.gov/articles/PMC7617517/)
+
+::: {.callout-note}
+### Are you using LightLogR in your paper? 
+
+Please let us know by [writing an email to us](mailto:johannes.zauner@tum.de?subject=Please%20highlight%20this%20paper%20in%20the%20bibliography%20of%20LightLogR%27s%20documentation%20and%20the%20newsletter&body=To%20the%20sender:%20please%20provide%20the%20DOI%20and%20a%20link%20to%20the%20publication.). We will add it to a bibliography on LightLogR's documentation webpage and feature it in the next newsletter. 
+:::
+
 ------------------------------------------------------------------------
 
 ##### We are thrilled to see LightLogR empowering research teams worldwide and look forward to sharing more tools, courses, and community news soon. {style="text-align: center;"}
+
 
 ## **Global Light Commons**: Shaping the Future of Light Data {#glee}
 
@@ -274,4 +296,4 @@ APA:
 
 Harvard:
 
-> Zauner, J., Tsukimori, E. & Spitschan, M. 2026. LightLogR Newsletter, no. 2, January. Available at: https://doi.org/10.5281/zenodo.18267830 (Published 19 January 2026).
+> Zauner, J., Thalji, S., Tsukimori, E. & Spitschan, M. 2026. LightLogR Newsletter, no. 2, January. Available at: https://doi.org/10.5281/zenodo.18267830 (Published 19 January 2026).

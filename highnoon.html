@@ -78,8 +78,64 @@ body {
   margin: 0;
   position: relative;
   color: #f7fbff;
-  box-shadow: 2px 2px black
   transition: color 0.35s ease-out;
+  text-shadow: 1px 1px #11111120;
+}
+
+body.sky-loading {
+  overflow: hidden;
+}
+
+#sky-loading-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, rgba(31, 110, 212, 0.96) 0%, rgba(78, 162, 245, 0.92) 60%, rgba(154, 217, 255, 0.85) 100%);
+  color: #f7fbff;
+  text-align: center;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+#sky-loading-overlay.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.sky-loading-card {
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: 18px;
+  padding: 1.4rem 2rem;
+  box-shadow: 0 16px 35px rgba(11, 34, 57, 0.25);
+  backdrop-filter: blur(6px);
+}
+
+.sky-loading-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.sky-loading-subtitle {
+  font-size: 0.95rem;
+  opacity: 0.85;
+  margin-bottom: 1rem;
+}
+
+.sky-loading-spinner {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.5);
+  border-top-color: #ffffff;
+  margin: 0 auto;
+  animation: sky-spin 0.9s linear infinite;
+}
+
+@keyframes sky-spin {
+  to { transform: rotate(360deg); }
 }
 
 body a {
@@ -120,7 +176,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .panel-tabset .nav-tabs .nav-link {
   color: #ffd166;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.5);
   border-radius: 999px;
   border: none;
 }
@@ -308,6 +364,26 @@ window.addEventListener('load', updateTextContrast);
 window.addEventListener('scroll', updateTextContrast, { passive: true });
 window.addEventListener('resize', updateTextContrast);
 
+function initSkyLoadingOverlay() {
+  if (document.getElementById('sky-loading-overlay')) {
+    return;
+  }
+  document.body.classList.add('sky-loading');
+
+  const overlay = document.createElement('div');
+  overlay.id = 'sky-loading-overlay';
+  overlay.setAttribute('role', 'status');
+  overlay.setAttribute('aria-live', 'polite');
+  overlay.innerHTML = `
+    <div class="sky-loading-card">
+      <div class="sky-loading-title">Setting the scene</div>
+      <div class="sky-loading-subtitle">Preparing the high noon sky...</div>
+      <div class="sky-loading-spinner" aria-hidden="true"></div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+}
+
 function buildSkyScene() {
   const sky = document.createElement('div');
   sky.id = 'sky-layer';
@@ -455,8 +531,21 @@ function buildSkyScene() {
 
     cloudLayer.appendChild(cloud);
   }
+
+  const overlay = document.getElementById('sky-loading-overlay');
+  if (overlay) {
+    overlay.classList.add('is-hidden');
+    setTimeout(() => overlay.remove(), 450);
+  }
+  document.body.classList.remove('sky-loading');
 }
-window.addEventListener('load', buildSkyScene);
+
+document.addEventListener('DOMContentLoaded', () => {
+  initSkyLoadingOverlay();
+  setDocHeight();
+  updateTextContrast();
+  buildSkyScene();
+});
 
 </script>
 

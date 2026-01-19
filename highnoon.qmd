@@ -127,7 +127,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .panel-tabset .nav-tabs .nav-link {
   color: #ffd166;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.25);
   border-radius: 999px;
   border: none;
 }
