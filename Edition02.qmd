@@ -255,7 +255,7 @@ Please let us know by [writing an email to us](mailto:johannes.zauner@tum.de?sub
 
 ## The "big build": Building a commons for light exposure data {#glee}
 
-![](assets/logo_glee.png){width=50%}
+![](assets/02/GLC_Logo.png){width=65% fig-align="center"}
 
 Our "big build" the *Global Light Commons* (a [GLEE initiative](https://www.visualdiet.org)) has been busy meeting with light enthusiasts across continents to understand the needs of our community globally.
  
