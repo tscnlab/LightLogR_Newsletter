@@ -23,7 +23,7 @@ We are back with another dose of **LightLogR** updates, now under a bright *high
 -   [LightLogR 0.10.0 *High noon* is here](#high-noon-release)
 -   [Open and reproducible analysis of light exposure and visual experience data](#open-repro-course)
 -   [LightLogR in publications and projects](#publications)
--   [Global Light Commons: Shaping the Future of Light Data](#glee)
+-   [The "big build": Building a commons for light exposure data](#glee)
 -   [Subscribe & unsubscribe](#subscribe-unsubscribe)
 -   [Cite](#cite)
 
@@ -272,6 +272,8 @@ To work toward this vision, we are developing the technical foundations of the *
 ### *Global Light Commons* Infrastructure
 
 The *Global Light Commons* aims to support the sharing, discovery, and reuse of light exposure datasets through a common, metadata-driven framework. At its core are schemas, developed with community input, that provide structured, machine-readable descriptions of studies, devices, contributors, participants, and datasets. These schemas enable validation of datasets deposited in general-purpose repositories such as Zenodo, helping ensure that data are interpretable, comparable, and discoverable across studies. Rather than hosting data itself, the Commons is designed to index datasets that conform to these descriptions. A public schema viewer makes the structure of the model visible, allowing researchers to inspect and understand the schema.
+ 
+![A sneak peek of the public schema viewer](assets/02/GLC_datapackage_viewer.png)
  
 ### Collaborative Insights
 
