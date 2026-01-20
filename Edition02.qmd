@@ -5,7 +5,6 @@ author: "LightLogR Team"
 doi: 10.5281/zenodo.18267830
 format:
   html:
-    self-contained: true
     email: true
     lightbox: true
     toc: false
@@ -254,33 +253,44 @@ Please let us know by [writing an email to us](mailto:johannes.zauner@tum.de?sub
 
 ##### We are thrilled to see LightLogR empowering research teams worldwide and look forward to sharing more tools, courses, and community news soon. {style="text-align: center;"}
 
+## The "big build": Building a commons for light exposure data {#glee}
 
-## **Global Light Commons**: Shaping the Future of Light Data {#glee}
+![](assets/logo_glee.png){width=50%}
 
-Our "big build", the **Global Light Commons** (a [GLEE initiative](https://www.visualdiet.org)) has been busy as we are meeting with light enthusiasts across continents to understand the needs of our community globally.
-
+Our "big build" the *Global Light Commons* (a [GLEE initiative](https://www.visualdiet.org)) has been busy meeting with light enthusiasts across continents to understand the needs of our community globally.
+ 
 ### Our Vision
 
 Our goal is to build a shared, open infrastructure for light exposure data. We want to ensure this data is:
 
--   Findable and accessible to all.
--   Usable across different sectors.
--   Reproducible for rigorous science, informed policy, and improved public health.
+- Findable and accessible to  all.
+- Usable across different  sectors.
+- Reproducible for rigorous  science, informed policy, and improved public health.
+ 
+To work toward this vision, we are developing the technical foundations of the *Global Light Commons*.
 
+### *Global Light Commons* Infrastructure
+
+The *Global Light Commons* aims to support the sharing, discovery, and reuse of light exposure datasets through a common, metadata-driven framework. At its core are schemas, developed with community input, that provide structured, machine-readable descriptions of studies, devices, contributors, participants, and datasets. These schemas enable validation of datasets deposited in general-purpose repositories such as Zenodo, helping ensure that data are interpretable, comparable, and discoverable across studies. Rather than hosting data itself, the Commons is designed to index datasets that conform to these descriptions. A public schema viewer makes the structure of the model visible, allowing researchers to inspect and understand the schema.
+ 
 ### Collaborative Insights
 
 We have been privileged to welcome researchers, government representatives, NGOs, and thought leaders to the table. Together, we’ve explored what sustainable data collection looks like, how to ensure a collective legacy, and the best ways to integrate with existing frameworks.
 
 While we are often working toward different specific outcomes, these conversations have unearthed some shared truths felt throughout our community:
 
--   The constant pressure to "publish or perish."
--   Existing workflows that unfortunately do not prioritize data upload or open publication.
+- The  constant pressure to "publish or perish."
+- Existing  workflows that unfortunately do not prioritize data upload or open  publication.
 
+These discussions have also underscored the importance of building a community of practice around light exposure data. Shared infrastructure alone is not sufficient: long-term sustainability and meaningful reuse depend on a critical mass of researchers who adopt common descriptions and norms around data sharing. Establishing this community is essential both for maintaining the infrastructure over time and for ensuring its relevance to ongoing research.
+ 
 ### Join the Conversation
 
 Each conversation grounds us in a shared vision for the future. We believe this infrastructure must be built with the community, not just for it.
+ 
+**We want to hear from you**. If you have perspectives or experiences to share, please get in touch via the [GLEE homepage](https://www.visualdiet.org).
 
-We want to hear from you. If you have perspectives or experiences to share, please get in touch via the [GLEE homepage](https://www.visualdiet.org).
+Read more about the vision for the *Global Light Commons* [here](https://cet.org/personal-light-exposure-research-needs-a-common-standard-not-a-thousand-wheels/).
 
 ## Subscribe & unsubscribe {#subscribe-unsubscribe}
 
