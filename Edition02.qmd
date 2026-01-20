@@ -1,5 +1,5 @@
 ---
-title: "LightLogR newsletter"
+title: "*LightLogR* newsletter"
 subtitle: "January 2026, Edition #02"
 author: "LightLogR Team"
 doi: 10.5281/zenodo.18267830
@@ -16,22 +16,22 @@ lang: en
 
 {{< include highnoon.qmd >}}
 
-We are back with another dose of **LightLogR** updates, now under a bright *high noon* sky. <!-- {style="color: white;"} -->
+We are back with another dose of *LightLogR* updates, now under a bright *high noon* sky. <!-- {style="color: white;"} -->
 
 ## In this newsletter
 
--   [LightLogR 0.10.0 *High noon* is here](#high-noon-release)
+-   [*LightLogR* 0.10.0 *High noon* is here](#high-noon-release)
 -   [Open and reproducible analysis of light exposure and visual experience data](#open-repro-course)
--   [LightLogR in publications and projects](#publications)
+-   [*LightLogR* in publications and projects](#publications)
 -   [The "big build": Building a commons for light exposure data](#glee)
 -   [Subscribe & unsubscribe](#subscribe-unsubscribe)
 -   [Cite](#cite)
 
 ------------------------------------------------------------------------
 
-## LightLogR 0.10.0 *High noon* is here {#high-noon-release}
+## *LightLogR* 0.10.0 *High noon* is here {#high-noon-release}
 
-The newest release, [**LightLogR 0.10.0 *High noon***](https://tscnlab.github.io/LightLogR/news/index.html#lightlogr-0100-high-noon), brings mid-day clarity to your analyses with improvements across the package. Thank you for the continued feedback and energy that made this possible.
+The newest release, [***LightLogR* 0.10.0 *High noon***](https://tscnlab.github.io/LightLogR/news/index.html#lightlogr-0100-high-noon), brings mid-day clarity to your analyses with improvements across the package. Thank you for the continued feedback and energy that made this possible.
 
 ```{r}
 #| eval: false
@@ -92,7 +92,7 @@ Combine these arguments to get quick access to exactly the participants and grou
 
 #### Support for multiple file format versions
 
-File formats evolve over time. `LightLogR` is now ready when things change, e.g., through a software update. Simply specify the version you need.
+File formats evolve over time. *LightLogR* is now ready when things change, e.g., through a software update. Simply specify the version you need.
 
 ```{r}
 #| eval: false
@@ -182,7 +182,7 @@ data |>
 
 Circular time is represented as angles on a circular system. When these are averaged, the distance between two points on the circle is relevant, not where the circle starts or ends. Thus, we get a sensible average, which, in this case, is about 3-4 minutes past midnight.
 
-Note that **LightLogR 0.10.0 *High noon*** uses the [`circular`](https://CRAN.R-project.org/package=circular) package to implement this functionality.
+Note that ***LightLogR* 0.10.0 *High noon*** uses the [`circular`](https://CRAN.R-project.org/package=circular) package to implement this functionality.
 
 :::
 
@@ -190,7 +190,7 @@ Note that **LightLogR 0.10.0 *High noon*** uses the [`circular`](https://CRAN.R-
 
 ### Explore the release notes
 
-Read the full changelog in the [LightLogR news section](https://tscnlab.github.io/LightLogR/news/index.html#lightlogr-0100-high-noon).
+Read the full changelog in the [*LightLogR* news section](https://tscnlab.github.io/LightLogR/news/index.html#lightlogr-0100-high-noon).
 
 ------------------------------------------------------------------------
 
@@ -198,7 +198,7 @@ Read the full changelog in the [LightLogR news section](https://tscnlab.github.i
 
 [![](assets/02/LLR_Tutorial_Banner.png)](https://tscnlab.github.io/LightLogR_webinar/)
 
-In October, we started a course series on the [**Open and reproducible analysis of light exposure and visual experience data**](https://tscnlab.github.io/LightLogR_webinar/), covering *beginner* and *advanced* levels. The course is targeted at all researchers that touch base with personal light exposure and visual experience data collected from wearable devices. The goal is to remove friction around common tasks when preparing analyses and combining streams of data through standardized pipelines and reproducible methods. While **LightLogR** sits at the center of this course, it goes beyond the package to explain tidy frameworks, common approaches (and pitfalls) in analysis, and gathers a research community developing and devoliping standards, instead of reinventing the wheel with every project.
+In October, we started a course series on the [**Open and reproducible analysis of light exposure and visual experience data**](https://tscnlab.github.io/LightLogR_webinar/), covering *beginner* and *advanced* levels. The course is targeted at all researchers that touch base with personal light exposure and visual experience data collected from wearable devices. The goal is to remove friction around common tasks when preparing analyses and combining streams of data through standardized pipelines and reproducible methods. While *LightLogR* sits at the center of this course, it goes beyond the package to explain tidy frameworks, common approaches (and pitfalls) in analysis, and gathers a research community developing and devoliping standards, instead of reinventing the wheel with every project.
 
 The course consists of dynamic (live) and static analysis scripts that cover all the bases. *Live* tutorials run a self‑contained version of R in your browser - no setup required - with only minor functional limitations. *Static* tutorials provide the complete script exactly as you would run it in a local R installation.
 
@@ -229,7 +229,7 @@ A special note of appreciation: we sent out **122 certificates** to participants
 
 ![](assets/02/certificate.png){width="40%" fig-align="center"}
 
-## LightLogR in publications and projects {#publications}
+## *LightLogR* in publications and projects {#publications}
 
 We are happy to share publications and activities from 2025 that use or feature *LightLogR*:
 
@@ -244,14 +244,14 @@ We are happy to share publications and activities from 2025 that use or feature 
 - Zauner et al.: [LightLogR: Reproducible analysis of personal light exposure data](https://pmc.ncbi.nlm.nih.gov/articles/PMC7617517/)
 
 ::: {.callout-note}
-### Are you using LightLogR in your paper? 
+### Are you using *LightLogR* in your paper? 
 
 Please let us know by [writing an email to us](mailto:johannes.zauner@tum.de?subject=Please%20highlight%20this%20paper%20in%20the%20bibliography%20of%20LightLogR%27s%20documentation%20and%20the%20newsletter&body=To%20the%20sender:%20please%20provide%20the%20DOI%20and%20a%20link%20to%20the%20publication.). We will add it to a bibliography on LightLogR's documentation webpage and feature it in the next newsletter. 
 :::
 
 ------------------------------------------------------------------------
 
-##### We are thrilled to see LightLogR empowering research teams worldwide and look forward to sharing more tools, courses, and community news soon. {style="text-align: center;"}
+##### We are thrilled to see *LightLogR* empowering research teams worldwide and look forward to sharing more tools, courses, and community news soon. {style="text-align: center;"}
 
 ## The "big build": Building a commons for light exposure data {#glee}
 
@@ -296,7 +296,7 @@ Read more about the vision for the *Global Light Commons* [here](https://cet.org
 
 ## Subscribe & unsubscribe {#subscribe-unsubscribe}
 
-You can subscribe to this newsletter (and unsubscribe) by visiting the [LightLogR mailing list](https://lists.lrz.de/mailman/listinfo/lightlogr-users).
+You can subscribe to this newsletter (and unsubscribe) by visiting the [*LightLogR* mailing list](https://lists.lrz.de/mailman/listinfo/lightlogr-users).
 
 ## Cite {#cite}
 
@@ -308,4 +308,4 @@ APA:
 
 Harvard:
 
-> Zauner, J., Thalji, S., Tsukimori, E. & Spitschan, M. 2026. LightLogR Newsletter, no. 2, January. Available at: https://doi.org/10.5281/zenodo.18267830 (Published 19 January 2026).
+> Zauner, J., Thalji, S., Tsukimori, E. & Spitschan, M. 2026. LightLogR Newsletter, no. 2, January. Available at: https://doi.org/10.5281/zenodo.18267830 (Published 20 January 2026).
